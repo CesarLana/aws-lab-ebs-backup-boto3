@@ -1,0 +1,55 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowEC2DescribeOperations",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeVolumes",
+        "ec2:DescribeSnapshots",
+        "ec2:DescribeTags"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowCreateSnapshotWithTags",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateSnapshot"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:*:volume/*",
+        "arn:aws:ec2:*:*:snapshot/*"
+      ]
+    },
+    {
+      "Sid": "AllowTaggingSnapshots",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:*:snapshot/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "ec2:CreateAction": "CreateSnapshot"
+        }
+      }
+    },
+    {
+      "Sid": "AllowDeleteOnlyAutomatedSnapshots",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DeleteSnapshot"
+      ],
+      "Resource": "arn:aws:ec2:*:*:snapshot/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/CreatedBy": "EBS-Backup-Automation"
+        }
+      }
+    }
+  ]
+}
