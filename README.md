@@ -1,4 +1,4 @@
-# AWS Lab: Automação de Backup de Volumes EBS com Python, Boto3 e Cron
+﻿# Lab AWS - Automacao de Backup de Volumes EBS com Python e Boto3
 
 Prática desenvolvida durante a formação **AWS re/Start (Escola da Nuvem)** para demonstrar como automatizar a rotina de cópias de segurança (snapshots) de discos EBS e evitar custos desnecessários com armazenamento mantendo uma política de retenção.
 
